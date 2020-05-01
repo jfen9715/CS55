@@ -100,7 +100,6 @@ export default {
       data.append('user_email', this.userForm.email)
       this.$axios.post('/login/verify/', data)
         .then(function (response) {
-          console.log(response)
           if (response.data.status === 0) {
             _this.userName = _this.userForm.email
             sessionStorage.setItem('user_email', _this.userForm.email)
@@ -120,7 +119,6 @@ export default {
       data.append('user_email', this.signForm.email)
       this.$axios.post('/login/register/', data)
         .then(function (response) {
-          console.log(response)
           if (response.data.status === 0) {
             _this.userName = _this.signForm.email
             sessionStorage.setItem('user_email', _this.signForm.email)

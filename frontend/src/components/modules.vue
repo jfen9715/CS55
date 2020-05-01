@@ -597,6 +597,7 @@ export default {
         data.append('module5_work', sessionStorage.getItem('module5_work'))
         data.append('module6_selection', sessionStorage.getItem('module6_selection'))
         data.append('after_test', sessionStorage.getItem('after_test'))
+        data.append('continue', sessionStorage.getItem('continue'))
         this.$axios.post('/login/save/', data)
           .then(function (response) {
             console.log(response)

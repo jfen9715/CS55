@@ -62,7 +62,6 @@ class Login(generic.View):  # handle the login operation
                 finished = True
             else:
                 user_data = user.userdata_set.all().latest('date')  # get latest record
-                print(user_data)
                 if user_data.current < 6:
                     finished = False
 
@@ -90,7 +89,7 @@ class Login(generic.View):  # handle the login operation
 
             r = {
                 'status': 2,
-                'msg': 'Please enter a correct email!'
+                'msg': 'Please Enter a Correct Email!'
             }
 
             print(r)
@@ -123,7 +122,7 @@ class Register(generic.View):  # handle the register operation
             print(e)
             r = {
                 'status': 1,
-                'msg': 'Email already exist!'
+                'msg': 'Email Already Exist!'
             }
             return JsonResponse(r)
 
@@ -138,11 +137,17 @@ class Save(generic.View):  # handle the operation when user already login and wa
 
         print('---------user save---------')
         print('user email:' + user_email)
-        print(request_data)
 
         try:
-            User.objects.get(user_email=user_email)
+            user = User.objects.get(user_email=user_email)
+            if request_data['continue'] == 'true':  # if continue to do the modules, update by deleting the old data
+                user_data = user.userdata_set.all().latest('date')  # get latest record
+                print('---------updating user data---------')
+                print('user email:' + user_email)
+                user_data.delete()
+
             save_data(user_email, request_data)
+
             r = {
                 'status': 0,
                 'msg': 'Save Successfully！'
@@ -156,7 +161,7 @@ class Save(generic.View):  # handle the operation when user already login and wa
 
             r = {
                 'status': 2,
-                'msg': 'Please login again'
+                'msg': 'Please Login Again'
             }
 
             return JsonResponse(r)
@@ -178,7 +183,7 @@ class GetUserData(generic.View):  # return user data to front-end
             if len(user.userdata_set.all()) == 0:
                 r = {
                     'state': 0,
-                    'msg': 'Please login again'
+                    'msg': 'No Record Exist'
                 }
                 print('---------return dataset---------')
                 print(r)
@@ -206,7 +211,7 @@ class GetUserData(generic.View):  # return user data to front-end
             print(e)
 
             r = {
-                'msg': 'Please login again'
+                'msg': 'Please Login Again'
             }
 
             return JsonResponse(r)
