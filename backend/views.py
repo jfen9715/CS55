@@ -1,11 +1,7 @@
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.views import generic
 from django.utils import timezone
-from .models import User, UserData
-
-# Create your views here.
+from .models import User
 
 
 def read_data(request):  # convert data from Http Request to python dictionary
@@ -21,7 +17,8 @@ def save_data(user_email, user_data):  # save data from Http Request to database
     # if no selected data, means the input data is empty, do not need to write to database
     if user_data['current'] == '0' and user_data['module1_advantages'] == '' \
             and user_data['module1_obstacles'] == '':
-        return
+        return False
+
     # write data to database
     user.userdata_set.create(
         before_test=user_data['before_test'],
@@ -32,15 +29,20 @@ def save_data(user_email, user_data):  # save data from Http Request to database
         module2_extra_need=user_data['module2_extra_need'],
         module3_selections=user_data['module3_selections'],
         module3_extra_value=user_data['module3_extra_value'],
-        module4_selection_1=user_data['module4_selection_1'],
-        module4_selection_2=user_data['module4_selection_2'],
+        module4_selections_1=user_data['module4_selections_1'],
+        module4_selections_2=user_data['module4_selections_2'],
         module5_personal=user_data['module5_personal'],
         module5_work=user_data['module5_work'],
-        module6_selection=user_data['module6_selection'],
+        module5_personal_selections=user_data['module5_personal_selections'],
+        module5_work_selections=user_data['module5_work_selections'],
+        module6_selections=user_data['module6_selections'],
         finished=user_data['finished'],
         current=user_data['current'],
+        after_test=user_data['after_test'],
         date=timezone.now()
     )
+
+    return True
 
 
 class Login(generic.View):  # handle the login operation
@@ -144,9 +146,13 @@ class Save(generic.View):  # handle the operation when user already login and wa
                 user_data = user.userdata_set.all().latest('date')  # get latest record
                 print('---------updating user data---------')
                 print('user email:' + user_email)
-                user_data.delete()
-
-            save_data(user_email, request_data)
+                if save_data(user_email, request_data):
+                    user_data.delete()
+                else:
+                    print('---------update failed: empty new data---------')
+                    print('user email:' + user_email)
+            else:
+                save_data(user_email, request_data)
 
             r = {
                 'status': 0,
@@ -160,7 +166,7 @@ class Save(generic.View):  # handle the operation when user already login and wa
             print(e)
 
             r = {
-                'status': 2,
+                'status': 1,
                 'msg': 'Please Login Again'
             }
 
@@ -215,5 +221,3 @@ class GetUserData(generic.View):  # return user data to front-end
             }
 
             return JsonResponse(r)
-
-

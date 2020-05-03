@@ -46,7 +46,7 @@
       </section>
     </section>
     <section v-else class="user_con">
-      <p>Welcome {{isAnonymous ? email : userName}}!</p>
+      <p>Welcome {{userName}}!</p>
       <section class="user_btn">
         <el-button v-if="finished" class="user_btn_s" type="primary" @click="toStart">Start Now</el-button>
         <template v-else>
@@ -76,7 +76,6 @@ export default {
       loginData,
       userName: '',
       email: '',
-      isAnonymous: false,
       finished: true,
       signForm: {
         email: '',
@@ -93,6 +92,12 @@ export default {
     }
   },
   methods: {
+    toAnonymously () {
+      console.log('Anonymous')
+      this.userName = 'Anonymous'
+      sessionStorage.setItem('user_email', 'Anonymous')
+      this.isLogin = true
+    },
     toLogin () {
       let _this = this
       let data = new URLSearchParams()
@@ -129,22 +134,12 @@ export default {
           console.log(error)
         })
     },
-    toAnonymously () {
-      this.isAnonymous = true
-      sessionStorage.setItem('user_email', 'Anonymous')
-    },
     toStart () {
+      console.log('start')
       if (this.finished === true) {
         sessionStorage.setItem('continue', 'false')
         this.$router.push('/modules')
       } else {
-        let data = new URLSearchParams()
-        data.append('user_email', sessionStorage.getItem('user_email'))
-        this.$axios.post('/login/data/', data)
-          .then(function (response) {
-            console.log(response.data)
-            // Load data in sessionStorage
-          })
         sessionStorage.setItem('continue', 'true')
         this.$router.push('/modules')
       }
@@ -295,4 +290,3 @@ export default {
     }
   }
 </style>
-

@@ -509,10 +509,68 @@ export default {
     }
   },
   mounted () {
+    let _this = this
     if (sessionStorage.getItem('user_email') !== null) {
       this.userName = sessionStorage.getItem('user_email')
       if (sessionStorage.getItem('continue') === 'true') {
-        // add data
+        console.log(sessionStorage.getItem('continue'))
+        let data = new URLSearchParams()
+        data.append('user_email', sessionStorage.getItem('user_email'))
+        _this.$axios.post('/login/data/', data)
+          .then(function (response) {
+            let rd = response.data
+            console.log(response.data)
+            console.log(_this.formData)
+            let before = rd.before_test.split(',')
+            console.log(before.length)
+            _this.formData.before.age = before[0]
+            _this.formData.before.gender = before[1]
+            _this.formData.module1.advantages = rd.module1_advantages.split(',')
+            _this.formData.module1.obstacles = rd.module1_obstacles.split(',')
+            _this.formData.module1.other = rd.module1_extra
+            let m2Selection = rd.module2_selections.split(',')
+            console.log(m2Selection)
+            _this.formData.module2.needs1 = parseInt(m2Selection[0])
+            _this.formData.module2.needs2 = parseInt(m2Selection[1])
+            _this.formData.module2.needs3 = parseInt(m2Selection[2])
+            _this.formData.module2.needs4 = parseInt(m2Selection[3])
+            _this.formData.module2.needs5 = parseInt(m2Selection[4])
+            _this.formData.module2.needs6 = parseInt(m2Selection[5])
+            _this.formData.module2.needs7 = parseInt(m2Selection[6])
+            _this.formData.module2.needs8 = parseInt(m2Selection[7])
+            _this.formData.module2.otherNeeds = rd.module2_extra_need
+            let m3Selection = rd.module3_selections.split(',')
+            console.log(m3Selection)
+            console.log(parseInt(m3Selection[0]))
+            _this.formData.module3.value1 = parseInt(m3Selection[0])
+            _this.formData.module3.value2 = parseInt(m3Selection[1])
+            _this.formData.module3.value3 = parseInt(m3Selection[2])
+            _this.formData.module3.value4 = parseInt(m3Selection[3])
+            _this.formData.module3.value5 = parseInt(m3Selection[4])
+            _this.formData.module3.value6 = parseInt(m3Selection[5])
+            _this.formData.module3.otherValues = rd.module3_extra_value
+            console.log(rd.module4_selections_1.split(','))
+            console.log(rd.module4_selections_2.split(','))
+            if (rd.module4_selections_1.length > 0) { _this.formData.module4.whenBefore = rd.module4_selections_1.split(',') }
+            if (rd.module4_selections_2.length > 0) { _this.formData.module4.whenAfter = rd.module4_selections_2.split(',') }
+            // module 5
+            if (rd.module5_personal_selections.split(',').length > 0) {
+              _this.formData.module5.personal = rd.module5_personal_selections.split(',')
+              for (let i = 0; i < 5; i++) {
+                if (rd.module5_personal.split(',')[i] !== '') {
+                  _this.formData.module5.perEffect[i.toString()] = parseInt(rd.module5_personal.split(',')[i])
+                }
+              }
+            }
+            if (rd.module5_work_selections.split(',').length > 0) {
+              _this.formData.module5.work = rd.module5_work_selections.split(',')
+              for (let i = 0; i < 3; i++) {
+                if (rd.module5_work.split(',')[i] !== '') {
+                  _this.formData.module5.workEffect[i.toString()] = parseInt(rd.module5_work.split(',')[i])
+                }
+              }
+            }
+          })
       }
     }
   },
@@ -523,6 +581,7 @@ export default {
     toNext (index) {
       this.finished[index] = true
       this.currentTab = `module${index + 1}`
+      console.log(this.formData)
     },
     checkChoice (key) {
       return this.formData.module1.advantages.includes(key) || this.formData.module1.obstacles.includes(key)
@@ -566,15 +625,17 @@ export default {
         this.formData.module3.value4.toString() + ',' + this.formData.module3.value5.toString() + ',' +
         this.formData.module3.value6.toString())
       sessionStorage.setItem('module3_extra_value', this.formData.module3.otherValues)
-      sessionStorage.setItem('module4_selection_1', this.formData.module4.whenBefore)
-      sessionStorage.setItem('module4_selection_2', this.formData.module4.whenAfter)
+      sessionStorage.setItem('module4_selections_1', this.formData.module4.whenBefore)
+      sessionStorage.setItem('module4_selections_2', this.formData.module4.whenAfter)
       sessionStorage.setItem('module5_personal', this.formData.module5.perEffect[0].toString() + ',' +
         this.formData.module5.perEffect[1].toString() + ',' + this.formData.module5.perEffect[2].toString() + ',' +
         this.formData.module5.perEffect[3].toString() + ',' + this.formData.module5.perEffect[4].toString())
+      sessionStorage.setItem('module5_personal_selections', this.formData.module5.personal)
       sessionStorage.setItem('module5_work', this.formData.module5.workEffect[0] + ',' +
         this.formData.module5.workEffect[1] + ',' + this.formData.module5.workEffect[2])
-      sessionStorage.setItem('module6_selection', this.formData.module6.way)
-      sessionStorage.setItem('after_test', this.formData.after.useful + this.formData.after.recommend +
+      sessionStorage.setItem('module5_work_selections', this.formData.module5.work)
+      sessionStorage.setItem('module6_selections', this.formData.module6.way)
+      sessionStorage.setItem('after_test', this.formData.after.useful + ',' + this.formData.after.recommend + ',' +
         this.formData.after.provide)
       // Save
       let _this = this
@@ -591,11 +652,13 @@ export default {
         data.append('module2_extra_need', sessionStorage.getItem('module2_extra_need'))
         data.append('module3_selections', sessionStorage.getItem('module3_selections'))
         data.append('module3_extra_value', sessionStorage.getItem('module3_extra_value'))
-        data.append('module4_selection_1', sessionStorage.getItem('module4_selection_1'))
-        data.append('module4_selection_2', sessionStorage.getItem('module4_selection_2'))
+        data.append('module4_selections_1', sessionStorage.getItem('module4_selections_1'))
+        data.append('module4_selections_2', sessionStorage.getItem('module4_selections_2'))
         data.append('module5_personal', sessionStorage.getItem('module5_personal'))
         data.append('module5_work', sessionStorage.getItem('module5_work'))
-        data.append('module6_selection', sessionStorage.getItem('module6_selection'))
+        data.append('module5_personal_selections', sessionStorage.getItem('module5_personal_selections'))
+        data.append('module5_work_selections', sessionStorage.getItem('module5_work_selections'))
+        data.append('module6_selections', sessionStorage.getItem('module6_selections'))
         data.append('after_test', sessionStorage.getItem('after_test'))
         data.append('continue', sessionStorage.getItem('continue'))
         this.$axios.post('/login/save/', data)
