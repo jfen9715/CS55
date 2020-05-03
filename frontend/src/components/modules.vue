@@ -528,32 +528,26 @@ export default {
             _this.formData.module1.advantages = rd.module1_advantages.split(',')
             _this.formData.module1.obstacles = rd.module1_obstacles.split(',')
             _this.formData.module1.other = rd.module1_extra
-            let m2Selection = rd.module2_selections.split(',')
-            console.log(m2Selection)
-            _this.formData.module2.needs1 = parseInt(m2Selection[0])
-            _this.formData.module2.needs2 = parseInt(m2Selection[1])
-            _this.formData.module2.needs3 = parseInt(m2Selection[2])
-            _this.formData.module2.needs4 = parseInt(m2Selection[3])
-            _this.formData.module2.needs5 = parseInt(m2Selection[4])
-            _this.formData.module2.needs6 = parseInt(m2Selection[5])
-            _this.formData.module2.needs7 = parseInt(m2Selection[6])
-            _this.formData.module2.needs8 = parseInt(m2Selection[7])
+            let module2Selections = rd.module2_selections.split(',')
+            _this.formData.module2.needs1 = parseInt(module2Selections[0])
+            _this.formData.module2.needs2 = parseInt(module2Selections[1])
+            _this.formData.module2.needs3 = parseInt(module2Selections[2])
+            _this.formData.module2.needs4 = parseInt(module2Selections[3])
+            _this.formData.module2.needs5 = parseInt(module2Selections[4])
+            _this.formData.module2.needs6 = parseInt(module2Selections[5])
+            _this.formData.module2.needs7 = parseInt(module2Selections[6])
+            _this.formData.module2.needs8 = parseInt(module2Selections[7])
             _this.formData.module2.otherNeeds = rd.module2_extra_need
-            let m3Selection = rd.module3_selections.split(',')
-            console.log(m3Selection)
-            console.log(parseInt(m3Selection[0]))
-            _this.formData.module3.value1 = parseInt(m3Selection[0])
-            _this.formData.module3.value2 = parseInt(m3Selection[1])
-            _this.formData.module3.value3 = parseInt(m3Selection[2])
-            _this.formData.module3.value4 = parseInt(m3Selection[3])
-            _this.formData.module3.value5 = parseInt(m3Selection[4])
-            _this.formData.module3.value6 = parseInt(m3Selection[5])
+            let module3Selections = rd.module3_selections.split(',')
+            _this.formData.module3.value1 = parseInt(module3Selections[0])
+            _this.formData.module3.value2 = parseInt(module3Selections[1])
+            _this.formData.module3.value3 = parseInt(module3Selections[2])
+            _this.formData.module3.value4 = parseInt(module3Selections[3])
+            _this.formData.module3.value5 = parseInt(module3Selections[4])
+            _this.formData.module3.value6 = parseInt(module3Selections[5])
             _this.formData.module3.otherValues = rd.module3_extra_value
-            console.log(rd.module4_selections_1.split(','))
-            console.log(rd.module4_selections_2.split(','))
             if (rd.module4_selections_1.length > 0) { _this.formData.module4.whenBefore = rd.module4_selections_1.split(',') }
             if (rd.module4_selections_2.length > 0) { _this.formData.module4.whenAfter = rd.module4_selections_2.split(',') }
-            // module 5
             if (rd.module5_personal_selections.split(',').length > 0) {
               _this.formData.module5.personal = rd.module5_personal_selections.split(',')
               for (let i = 0; i < 5; i++) {
