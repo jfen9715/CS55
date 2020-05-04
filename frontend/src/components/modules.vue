@@ -519,14 +519,17 @@ export default {
         _this.$axios.post('/login/data/', data)
           .then(function (response) {
             let rd = response.data
-            console.log(response.data)
-            console.log(_this.formData)
             let before = rd.before_test.split(',')
-            console.log(before.length)
             _this.formData.before.age = before[0]
             _this.formData.before.gender = before[1]
-            _this.formData.module1.advantages = rd.module1_advantages.split(',')
-            _this.formData.module1.obstacles = rd.module1_obstacles.split(',')
+            console.log(rd.module1_advantages.length)
+            console.log(rd.module1_advantages.split(',').length)
+            if (rd.module1_advantages.length > 0) {
+              _this.formData.module1.advantages = rd.module1_advantages.split(',')
+            }
+            if (rd.module1_obstacles.length > 0) {
+              _this.formData.module1.obstacles = rd.module1_obstacles.split(',')
+            }
             _this.formData.module1.other = rd.module1_extra
             let module2Selections = rd.module2_selections.split(',')
             _this.formData.module2.needs1 = parseInt(module2Selections[0])
@@ -548,7 +551,7 @@ export default {
             _this.formData.module3.otherValues = rd.module3_extra_value
             if (rd.module4_selections_1.length > 0) { _this.formData.module4.whenBefore = rd.module4_selections_1.split(',') }
             if (rd.module4_selections_2.length > 0) { _this.formData.module4.whenAfter = rd.module4_selections_2.split(',') }
-            if (rd.module5_personal_selections.split(',').length > 0) {
+            if (rd.module5_personal_selections.length > 0) {
               _this.formData.module5.personal = rd.module5_personal_selections.split(',')
               for (let i = 0; i < 5; i++) {
                 if (rd.module5_personal.split(',')[i] !== '') {
@@ -556,7 +559,7 @@ export default {
                 }
               }
             }
-            if (rd.module5_work_selections.split(',').length > 0) {
+            if (rd.module5_work_selections.length > 0) {
               _this.formData.module5.work = rd.module5_work_selections.split(',')
               for (let i = 0; i < 3; i++) {
                 if (rd.module5_work.split(',')[i] !== '') {

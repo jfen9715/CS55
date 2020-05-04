@@ -51,7 +51,7 @@
         <el-button v-if="finished" class="user_btn_s" type="primary" @click="toStart">Start Now</el-button>
         <template v-else>
           <el-button class="user_btn_s" type="primary" @click="toStart">Restart</el-button>
-          <el-button class="user_btn_s" type="primary" @click="toStart">Continue</el-button>
+          <el-button class="user_btn_s" type="primary" @click="toStart(false)">Continue</el-button>
         </template>
       </section>
     </section>
@@ -134,13 +134,16 @@ export default {
           console.log(error)
         })
     },
-    toStart () {
+    toStart (re = true) {
       console.log('start')
       if (this.finished === true) {
         sessionStorage.setItem('continue', 'false')
         this.$router.push('/modules')
-      } else {
+      } else if (re === false) {
         sessionStorage.setItem('continue', 'true')
+        this.$router.push('/modules')
+      } else {
+        sessionStorage.setItem('continue', 'false')
         this.$router.push('/modules')
       }
     }
