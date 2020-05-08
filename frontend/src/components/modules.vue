@@ -408,10 +408,10 @@
          </section>
       </el-tab-pane>
       <el-tab-pane name="module9" :disabled="!finished[8]">
-        <span slot="label"><i v-if="finished[9]" class="el-icon-success"></i>Result & Suggestion</span>
+        <span slot="label"><i v-if="finished[9]" class="el-icon-success"></i>Finished</span>
         <section class="tab_content tab_content_8">
           <div class="tab_main tab_main_before">
-            <h3>Result & Suggestion</h3>
+            <h3>Thank you!</h3>
             <p>{{suggestion}}</p>
             <section class="btn">
               <el-button type="primary" @click="toSave">Submit</el-button>
@@ -437,7 +437,7 @@ export default {
       currentTab: 'module0',
       finished: [],
       ...moduleData,
-      suggestion: '',
+      suggestion: "If you have any question, please click the 'Need Help?' button to contact us!",
       AdvNObs: {},
       formData: {
         before: {
