@@ -513,7 +513,6 @@ export default {
     if (sessionStorage.getItem('user_email') !== null) {
       this.userName = sessionStorage.getItem('user_email')
       if (sessionStorage.getItem('continue') === 'true') {
-        console.log(sessionStorage.getItem('continue'))
         let data = new URLSearchParams()
         data.append('user_email', sessionStorage.getItem('user_email'))
         _this.$axios.post('/login/data/', data)
@@ -522,8 +521,6 @@ export default {
             let before = rd.before_test.split(',')
             _this.formData.before.age = before[0]
             _this.formData.before.gender = before[1]
-            console.log(rd.module1_advantages.length)
-            console.log(rd.module1_advantages.split(',').length)
             if (rd.module1_advantages.length > 0) {
               _this.formData.module1.advantages = rd.module1_advantages.split(',')
             }
@@ -578,7 +575,6 @@ export default {
     toNext (index) {
       this.finished[index] = true
       this.currentTab = `module${index + 1}`
-      console.log(this.formData)
     },
     checkChoice (key) {
       return this.formData.module1.advantages.includes(key) || this.formData.module1.obstacles.includes(key)
@@ -660,7 +656,6 @@ export default {
         data.append('continue', sessionStorage.getItem('continue'))
         this.$axios.post('/login/save/', data)
           .then(function (response) {
-            console.log(response)
             if (response.data.status === 0) {
               // logout
               sessionStorage.clear()

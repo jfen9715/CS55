@@ -91,7 +91,7 @@ class Login(generic.View):  # handle the login operation
 
             r = {
                 'status': 2,
-                'msg': 'Please Enter a Correct Email!'
+                'msg': 'Email incorrect!'
             }
 
             print(r)
@@ -191,7 +191,7 @@ class GetUserData(generic.View):  # return user data to front-end
                     'state': 0,
                     'msg': 'No Record Exist'
                 }
-                print('---------return dataset---------')
+                print('---------empty dataset---------')
                 print(r)
 
                 return JsonResponse(r)

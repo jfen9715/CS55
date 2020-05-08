@@ -93,7 +93,6 @@ export default {
   },
   methods: {
     toAnonymously () {
-      console.log('Anonymous')
       this.userName = 'Anonymous'
       sessionStorage.setItem('user_email', 'Anonymous')
       this.isLogin = true
@@ -111,6 +110,7 @@ export default {
             _this.finished = response.data.finished
             _this.isLogin = true
           }
+          alert(response.data.msg)
         })
         .catch(function (error) {
           console.log(error)
@@ -129,6 +129,7 @@ export default {
             sessionStorage.setItem('user_email', _this.signForm.email)
             _this.isLogin = true
           }
+          alert(response.data.msg)
         })
         .catch(function (error) {
           console.log(error)
