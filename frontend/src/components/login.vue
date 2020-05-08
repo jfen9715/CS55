@@ -109,8 +109,9 @@ export default {
             sessionStorage.setItem('user_email', _this.userForm.email)
             _this.finished = response.data.finished
             _this.isLogin = true
+          } else {
+            alert(response.data.msg)
           }
-          alert(response.data.msg)
         })
         .catch(function (error) {
           console.log(error)
@@ -128,8 +129,9 @@ export default {
             _this.userName = _this.signForm.email
             sessionStorage.setItem('user_email', _this.signForm.email)
             _this.isLogin = true
+          } else {
+            alert(response.data.msg)
           }
-          alert(response.data.msg)
         })
         .catch(function (error) {
           console.log(error)
