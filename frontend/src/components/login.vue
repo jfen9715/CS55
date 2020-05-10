@@ -292,7 +292,8 @@ export default {
       align-content: space-around;
     }
     .el-tabs {
-      height: 450px;
+      height: 500px;
+       padding-bottom: 40px;
     }
   }
 </style>
