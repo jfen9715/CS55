@@ -46,6 +46,8 @@ export default {
   }
   .help_para {
     margin: 20px 0;
+    word-wrap: break-word;
+    word-break: normal;
   }
   .help_ctx {
     margin: 10px 0;
@@ -66,8 +68,8 @@ export default {
       overflow: auto;
     }
     .help_con {
-      height: calc(100vh - 81px);
-      padding: 10px 20px;
+      height: calc(100vh - 181px);
+      padding: 20px 20px 100px;
     }
   }
 </style>
