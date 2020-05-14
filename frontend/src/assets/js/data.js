@@ -30,7 +30,7 @@ export const moduleData = {
   module1: {
     choices: {
       0: `We can talk about options to my working hours.`,
-      1: `They will be more understanding if I need to have time off to see my doctor/health professionals.`,
+      1: `They will be more understanding if I need to have time off to see my doctor / health professionals.`,
       2: `I will feel relief as I don't have to hide my struggles from co-workers.`,
       3: `I may be helping others to be honest about their mental health.`,
       4: `People in my workplace may be more understanding if I am not keeping on top of my work.`,
@@ -51,7 +51,7 @@ export const moduleData = {
     needs3: `to make changes to my current role as I feel like I can't do certain jobs`,
     needs4: `to make changes to my role so I can do certain parts of my job properly`,
     needs5: `to have a plan at work in case I suddenly become ill`,
-    needs6: `to teach someone my role so that I don 't feel guilty or stressed if I need to take time off work`,
+    needs6: `to teach someone my role so that I do not feel guilty or stressed if I need to take time off work`,
     needs7: `to meet with my boss more often to make sure that I am doing my job right`,
     needs8: `I need to have some time-outs during the day when I'm not feeling so good`
   },
@@ -69,7 +69,7 @@ export const moduleData = {
   },
   module3: {
     value1: {
-      1:`being open and honest`,
+      1: `being open and honest`,
       5: `keeping private`
     },
     value2:  {
@@ -103,7 +103,7 @@ export const moduleData = {
   module4Table: [{
     when: `In a one-on-one meeting`,
     advantage: [
-      `Honesty/piece of mind`,
+      `Honesty / piece of mind`,
       `Gives you a chance to talk about it in a formal setting`,
       `Gives you a chance to respond in person to any issues or questions`,
       `They may not be negative while you are there in person`
@@ -115,7 +115,7 @@ export const moduleData = {
   }, {
     when: `In a chat at work, at the pub, or a social event`,
     advantage: [
-      `Honesty/piece of mind`,
+      `Honesty / piece of mind`,
       `Give you a chance to respond in person to any issues or questions`,
       `They may not be negative while you are there in person`,
       `You can keep a casual approach your mental health condition, which may help your boss to feel more positive going forward`
@@ -123,7 +123,7 @@ export const moduleData = {
     obstacle: [
       `Employer might lose trust in you and believe you should have told them earlier`,
       `May harm the working relationship`,
-      `All questions may not be asked/answered as your boss may not have enough time to think about the situation`,
+      `All questions may not be asked / answered as your boss may not have enough time to think about the situation`,
       `Chat may not be confidential`
     ]
   }, {

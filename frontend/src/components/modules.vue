@@ -945,4 +945,8 @@ export default {
   .tab_content_0 /deep/ .el-input{
       width: 350px;
     }
+  .el-table /deep/ .cell{
+    word-wrap: break-word;
+    word-break: normal;
+  }
 </style>

@@ -46,8 +46,8 @@ export default {
   }
   .help_para {
     margin: 20px 0;
-    word-wrap: break-word;
-    word-break: normal;
+    word-wrap: break-spaces;
+    word-break: keep-all;
   }
   .help_ctx {
     margin: 10px 0;
