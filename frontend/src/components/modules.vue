@@ -573,8 +573,39 @@ export default {
       this.showModule = index
     },
     toNext (index) {
-      this.finished[index] = true
-      this.currentTab = `module${index + 1}`
+      let _this = this
+      let validation = true
+      switch (index) {
+        case 1:
+          console.log(111)
+          if (_this.formData.module1.advantages.length === 0 && _this.formData.module1.obstacles.length === 0) {
+            validation = false
+          }
+          break
+        case 4:
+          if (_this.formData.module4.whenBefore.length === 0) {
+            validation = false
+          } else if (_this.formData.module4.whenAfter.length === 0) {
+            validation = false
+          }
+          break
+        case 5:
+          if (_this.formData.module5.personal.length === 0 && _this.formData.module5.work.length === 0) {
+            validation = false
+          }
+          break
+        case 6:
+          if (_this.formData.module6.way.length === 0) {
+            validation = false
+          }
+          break
+      }
+      if (validation) {
+        this.finished[index] = true
+        this.currentTab = `module${index + 1}`
+      } else {
+        alert('Please select something before go to the next module!')
+      }
     },
     checkChoice (key) {
       return this.formData.module1.advantages.includes(key) || this.formData.module1.obstacles.includes(key)
