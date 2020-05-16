@@ -577,7 +577,6 @@ export default {
       let validation = true
       switch (index) {
         case 1:
-          console.log(111)
           if (_this.formData.module1.advantages.length === 0 && _this.formData.module1.obstacles.length === 0) {
             validation = false
           }
