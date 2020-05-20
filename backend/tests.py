@@ -25,7 +25,7 @@ class LoginModuleTests(TestCase):
 
         users = User.objects.all()
         for user in users:
-            data = {'user_name': user.user_name, 'user_email': 'xxxxxxxxx@xxxxxx.com', 'user_password': 'ukisdhfauiweblbasdl'}
+            data = {'user_name': user.user_name, 'user_email': 'xxxxxxx@xxxxxx.com', 'user_password': 'ukisdhfauiweblbasdl'}
             response = self.client.post('/login/verify/', data)
             self.assertContains(response, "Email incorrect!")
 
@@ -39,7 +39,7 @@ class LoginModuleTests(TestCase):
 
     def test_register_with_strange_password_and_user_name(self):
 
-        data = {'user_name': 'new_test_user_][1@#1', 'user_email': 'a_@testing_email', 'user_password': 'ajshdfui!@#wer2[]a;s'}
+        data = {'user_name': 'new_test_user_][1@#1', 'user_email': 'a_@testing_email', 'user_password': 'ajshd@#$&!@#wer2[]a;s'}
         response = self.client.post('/login/register/', data)
         self.assertContains(response, "Signup Successfully!")
 
