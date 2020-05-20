@@ -37,17 +37,17 @@ class LoginModuleTests(TestCase):
             response = self.client.post('/login/verify/', data)
             self.assertContains(response, "Login Successfully!")
 
-    def test_register_with_strange_password(self):
+    def test_register_with_strange_password_and_user_name(self):
 
-        data = {'user_name': 'new_test_user_name', 'user_email': 'a_@testing_email', 'user_password': 'ajshdfui!@#wer2[]a;s'}
+        data = {'user_name': 'new_test_user_][1@#1', 'user_email': 'a_@testing_email', 'user_password': 'ajshdfui!@#wer2[]a;s'}
         response = self.client.post('/login/register/', data)
         self.assertContains(response, "Signup Successfully!")
 
     def test_register_with_long_password(self):
 
         data = {'user_name': 'new_test_user_name', 'user_email': 'a_testing_email',
-                'user_password': 'ajshdfui!@#wer2[]a;sajksdhfjklahiuhqwuiebuifabdijpojiosdjoa'}
+                'user_password': 'ajshdfui!@#wer2[]a;sajksdhfjkalksdjfklajsdklflahiuhqwuiebuifabdijpojiosdjoa'}
         response = self.client.post('/login/register/', data)
-        self.assertContains(response, "Password Should Not Longer Than 20 Characters!")
+        self.assertContains(response, "Password Should Not Longer Than 30 Characters!")
 
 

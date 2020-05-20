@@ -111,24 +111,24 @@ class Register(generic.View):  # handle the register operation
         print('---------user register---------')
         print('user email:' + user_email)
 
-        if len(user_password) > 20:
+        if len(user_password) > 30:
             r = {
                 'status': 2,
-                'msg': 'Password Should Not Longer Than 20 Characters!'
+                'msg': 'Password Should Not Longer Than 30 Characters!'
             }
             return JsonResponse(r)
 
-        if len(user_name) > 20:
+        if len(user_name) > 30:
             r = {
                 'status': 2,
-                'msg': 'User Name Should Not Longer Than 20 Characters!'
+                'msg': 'User Name Should Not Longer Than 30 Characters!'
             }
             return JsonResponse(r)
 
-        if len(user_email) > 20:
+        if len(user_email) > 30:
             r = {
                 'status': 2,
-                'msg': 'Email Address Should Not Longer Than 20 Characters!'
+                'msg': 'Email Address Should Not Longer Than 30 Characters!'
             }
             return JsonResponse(r)
 
