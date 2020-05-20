@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.views import generic
 from django.utils import timezone
 from .models import User
+import re
 
 
 def read_data(request):  # convert data from Http Request to python dictionary
@@ -128,6 +129,13 @@ class Register(generic.View):  # handle the register operation
             r = {
                 'status': 2,
                 'msg': 'Email Address Should Not Longer Than 20 Characters!'
+            }
+            return JsonResponse(r)
+
+        if '@' not in user_email:
+            r = {
+                'status': 3,
+                'msg': 'Incorrect Email Address!'
             }
             return JsonResponse(r)
 

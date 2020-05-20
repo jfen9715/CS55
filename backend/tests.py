@@ -39,7 +39,7 @@ class LoginModuleTests(TestCase):
 
     def test_register_with_strange_password(self):
 
-        data = {'user_name': 'new_test_user_name', 'user_email': 'a_testing_email', 'user_password': 'ajshdfui!@#wer2[]a;s'}
+        data = {'user_name': 'new_test_user_name', 'user_email': 'a_@testing_email', 'user_password': 'ajshdfui!@#wer2[]a;s'}
         response = self.client.post('/login/register/', data)
         self.assertContains(response, "Signup Successfully!")
 
