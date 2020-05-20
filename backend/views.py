@@ -94,7 +94,6 @@ class Login(generic.View):  # handle the login operation
                 'msg': 'Email incorrect!'
             }
 
-            print(r)
             return JsonResponse(r)
 
 
@@ -111,9 +110,31 @@ class Register(generic.View):  # handle the register operation
         print('---------user register---------')
         print('user email:' + user_email)
 
+        if len(user_password) > 20:
+            r = {
+                'status': 2,
+                'msg': 'Password Should Not Longer Than 20 Characters!'
+            }
+            return JsonResponse(r)
+
+        if len(user_name) > 20:
+            r = {
+                'status': 2,
+                'msg': 'User Name Should Not Longer Than 20 Characters!'
+            }
+            return JsonResponse(r)
+
+        if len(user_email) > 20:
+            r = {
+                'status': 2,
+                'msg': 'Email Address Should Not Longer Than 20 Characters!'
+            }
+            return JsonResponse(r)
+
         try:
             user = User(user_name=user_name, user_password=user_password, user_email=user_email)  # try to create user
             user.save()
+
             r = {
                 'status': 0,
                 'msg': 'Signup Successfully!'
