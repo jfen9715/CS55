@@ -1,8 +1,0 @@
-runtime: python37
-
-handlers:
-- url: /static
-  static_dir: frontend/dist/static/
-
-- url: /.*
-  script: auto
