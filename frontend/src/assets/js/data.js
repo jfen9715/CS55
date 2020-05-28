@@ -233,7 +233,7 @@ export const moduleData = {
     0: `Keep it a secret`,
     1: `Only tell trusted people`,
     2: `Tell anyone`,
-    3: `Tell everyon`,
+    3: `Tell everyone`,
     4: `Tell no-one`
   }
 }
